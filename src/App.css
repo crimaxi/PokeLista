@@ -30,6 +30,35 @@ body {
   margin-bottom: 0.5rem;
 }
 
+/* Search Bar */
+.search-bar {
+  padding: 1.5rem;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: center;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 500px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.search-input::placeholder {
+  color: #bdc3c7;
+}
+
 /* Main Container */
 .main-container {
   padding: 2rem;
@@ -53,6 +82,17 @@ body {
   padding: 2rem;
   color: #7f8c8d;
   font-size: 1.2rem;
+}
+
+/* No Results */
+.no-results {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #7f8c8d;
+}
+
+.no-results p {
+  font-size: 1.1rem;
 }
 
 /* Item Card */
