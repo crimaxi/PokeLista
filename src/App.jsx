@@ -3,6 +3,7 @@ import { useFetch } from './hooks/useFetch';
 import { Header } from './components/Header';
 import { SearchBar } from './components/SearchBar';
 import { ItemList } from './components/ItemList';
+import { FavoritesPanel } from './components/FavoritesPanel';
 import { LoadingSpinner } from './components/LoadingSpinner';
 import { ErrorMessage } from './components/ErrorMessage';
 import './App.css';
@@ -16,6 +17,9 @@ function App() {
   
   // Estado para la lista filtrada
   const [filteredPokemon, setFilteredPokemon] = useState([]);
+
+  // Estado para los favoritos (almacena nombres de pokemon)
+  const [favorites, setFavorites] = useState([]);
 
   // Usar el hook personalizado para consumir la API
   const { data, loading, error } = useFetch(apiUrl);
@@ -33,6 +37,18 @@ function App() {
       setFilteredPokemon(filtered);
     }
   }, [pokemon, searchTerm]);
+
+  // Función para agregar o eliminar un pokémon de favoritos
+  const toggleFavorite = (pokemonName) => {
+    setFavorites((prev) =>
+      prev.includes(pokemonName)
+        ? prev.filter((name) => name !== pokemonName)
+        : [...prev, pokemonName]
+    );
+  };
+
+  // Obtener los objetos completos de los favoritos
+  const favoritePokemons = pokemon.filter((p) => favorites.includes(p.name));
 
   return (
     <div className="app">
@@ -52,7 +68,11 @@ function App() {
         {!loading && !error && (
           <>
             {filteredPokemon.length > 0 ? (
-              <ItemList items={filteredPokemon} />
+              <ItemList 
+                items={filteredPokemon} 
+                favorites={favorites}
+                onToggleFavorite={toggleFavorite}
+              />
             ) : (
               <div className="no-results">
                 {pokemon.length === 0 ? (
@@ -62,6 +82,12 @@ function App() {
                 )}
               </div>
             )}
+
+            {/* Panel de favoritos a la derecha */}
+            <FavoritesPanel 
+              favorites={favoritePokemons}
+              onRemoveFavorite={toggleFavorite}
+            />
           </>
         )}
       </div>

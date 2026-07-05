@@ -5,8 +5,8 @@
 export const Header = () => {
   return (
     <header className="header">
-      <h1>Pokédex - API Viewer</h1>
-      <p>Consumo de PokeAPI con React</p>
+      <h1>POKÉDEX</h1>
+      <p>¡Atrapa todos los Pokémon!</p>
     </header>
   );
 };
