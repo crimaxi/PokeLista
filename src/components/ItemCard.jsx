@@ -1,31 +1,36 @@
+import { useFetch } from '../hooks/useFetch';
+
 /**
  * Componente ItemCard
- * Tarjeta individual del producto/servicio con su imagen y botones de acción
+ * Renderiza una tarjeta individual del Pokémon con su imagen
  */
-export const ItemCard = ({ item, isFavorite, isBlocked, onToggleFavorite, onToggleBlock }) => {
-  if (isBlocked) return null;
+export const ItemCard = ({ item }) => {
+  // Consumir la API para obtener los detalles del Pokémon (incluyendo imagen)
+  const { data: pokemonDetails, loading } = useFetch(item.url);
+
+  // Obtener la URL de la imagen desde los detalles
+  const imageUrl = pokemonDetails?.sprites?.other?.['official-artwork']?.front_default ||
+                   pokemonDetails?.sprites?.front_default ||
+                   null;
 
   return (
     <div className="item-card">
-      {item.image && <img src={item.image} alt={item.name} />}
-      <h3>{item.name}</h3>
-      <p>{item.description}</p>
-      <div className="card-actions">
-        <button
-          className={`btn-favorite ${isFavorite ? 'active' : ''}`}
-          onClick={onToggleFavorite}
-          title="Añadir a favoritos"
-        >
-          ❤️
-        </button>
-        <button
-          className="btn-block"
-          onClick={onToggleBlock}
-          title="Bloquear elemento"
-        >
-          ❌
-        </button>
-      </div>
+      {/* Mostrar spinner mientras se cargan los detalles */}
+      {loading ? (
+        <div className="card-placeholder">Cargando...</div>
+      ) : (
+        <>
+          {/* Mostrar imagen del Pokémon */}
+          {imageUrl ? (
+            <img src={imageUrl} alt={item.name} className="card-image" />
+          ) : (
+            <div className="card-placeholder">Sin imagen</div>
+          )}
+          
+          {/* Mostrar nombre del Pokémon */}
+          <h3 className="card-title">{item.name.toUpperCase()}</h3>
+        </>
+      )}
     </div>
   );
 };

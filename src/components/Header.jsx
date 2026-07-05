@@ -1,12 +1,12 @@
 /**
  * Componente Header
- * Contiene el título y los nombres de los integrantes del proyecto
+ * Encabezado de la aplicación con título
  */
 export const Header = () => {
   return (
     <header className="header">
-      <h1>Proyecto Final - Front End</h1>
-      <p>Integrantes: [Añadir nombres]</p>
+      <h1>Pokédex - API Viewer</h1>
+      <p>Consumo de PokeAPI con React</p>
     </header>
   );
 };

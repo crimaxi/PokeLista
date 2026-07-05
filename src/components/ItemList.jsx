@@ -2,9 +2,9 @@ import { ItemCard } from './ItemCard';
 
 /**
  * Componente ItemList
- * Contenedor principal de los resultados de búsqueda
+ * Renderiza la lista completa de elementos obtenidos de la API
  */
-export const ItemList = ({ items, onToggleFavorite, onToggleBlock, blocked, favorites }) => {
+export const ItemList = ({ items }) => {
   if (!items || items.length === 0) {
     return <div className="item-list empty">No hay elementos para mostrar</div>;
   }
@@ -12,14 +12,7 @@ export const ItemList = ({ items, onToggleFavorite, onToggleBlock, blocked, favo
   return (
     <div className="item-list">
       {items.map((item) => (
-        <ItemCard
-          key={item.id}
-          item={item}
-          isFavorite={favorites.includes(item.id)}
-          isBlocked={blocked.includes(item.id)}
-          onToggleFavorite={() => onToggleFavorite(item.id)}
-          onToggleBlock={() => onToggleBlock(item.id)}
-        />
+        <ItemCard key={item.name} item={item} />
       ))}
     </div>
   );

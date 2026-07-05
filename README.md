@@ -1,60 +1,89 @@
-# Proyecto Final - Front End
+# Pokédex - API Viewer
 
-Aplicación React para gestionar elementos con búsqueda, favoritos y bloqueo de elementos.
+Aplicación React que consume la **PokeAPI** para demostrar:
 
-## Estructura del Proyecto
+## 📋 Requerimientos Implementados
+
+### 1. **Consumo de API** ✅
+- Conexión a la PokeAPI pública
+- Obtención de listado de Pokémon con imágenes
+
+### 2. **Hook Personalizado** ✅
+- `useFetch.js` - Hook reutilizable para manejar peticiones HTTP
+- Gestión automática de estados (data, loading, error)
+
+### 3. **Manejo de Estados** ✅
+- **Estado de Carga**: Indicador visual (spinner) mientras se consulta la API
+- **Estado de Error**: Mensaje claro si la petición falla
+
+### 4. **Despliegue del Listado** ✅
+- Renderización de lista completa de Pokémon
+- Visualización de imagen oficial de cada Pokémon
+- Nombre del Pokémon en cada tarjeta
+
+### 5. **Arquitectura Limpia** ✅
+- Componentes funcionales y separados:
+  - `Header.jsx` - Encabezado
+  - `ItemList.jsx` - Contenedor de lista
+  - `ItemCard.jsx` - Tarjeta individual
+  - `LoadingSpinner.jsx` - Indicador de carga
+  - `ErrorMessage.jsx` - Manejo de errores
+- Hook personalizado en carpeta `hooks/`
+
+## 📁 Estructura
 
 ```
 src/
 ├── hooks/
-│   ├── useFetch.js          # Hook para peticiones a API
-│   └── useLocalStorage.js   # Hook para persistencia de datos
+│   └── useFetch.js          # Hook para consumir API
 ├── components/
 │   ├── Header.jsx
-│   ├── SearchBar.jsx
-│   ├── Statistics.jsx
 │   ├── ItemList.jsx
 │   ├── ItemCard.jsx
-│   ├── FavoritesPanel.jsx
-│   ├── BlockedPanel.jsx
 │   ├── LoadingSpinner.jsx
 │   └── ErrorMessage.jsx
-├── App.jsx                  # Componente principal
-├── main.jsx                 # Punto de entrada
-├── App.css
-└── index.css
+├── App.jsx                   # Componente principal
+├── main.jsx                  # Punto de entrada
+├── App.css                   # Estilos de componentes
+└── index.css                 # Estilos globales
 ```
 
-## Instalación
+## 🚀 Instalación y Ejecución
 
-1. Instalar dependencias:
 ```bash
+# Instalar dependencias
 npm install
-```
 
-2. Ejecutar servidor de desarrollo:
-```bash
+# Ejecutar servidor de desarrollo
 npm run dev
-```
 
-3. Compilar para producción:
-```bash
+# Compilar para producción
 npm run build
 ```
 
-## Características
+## 📌 API Utilizada
 
-- ✅ Búsqueda de elementos en tiempo real
-- ✅ Sistema de favoritos persistente
-- ✅ Bloqueo de elementos
-- ✅ Estadísticas en vivo
-- ✅ Interfaz responsiva
-- ✅ Manejo de errores y carga
+**[PokeAPI](https://pokeapi.co/)** - API pública y gratuita de Pokémon
 
-## Autores
+- **Endpoint**: `https://pokeapi.co/api/v2/pokemon`
+- **Detalles**: `https://pokeapi.co/api/v2/pokemon/{name}`
 
-[Añadir nombres de integrantes]
+## 🛠 Tecnologías
 
-## Licencia
+- **React 18** - Framework UI
+- **Vite** - Build tool
+- **Fetch API** - Consumo de API
 
-MIT
+## ✨ Características
+
+- Carga de Pokémon desde API
+- Imágenes oficiales de alta calidad
+- Interfaz responsiva
+- Manejo automático de errores
+- Indicador visual de carga
+
+## 📝 Notas
+
+- El proyecto consume 20 Pokémon iniciales (configurable en App.jsx)
+- Cada tarjeta hace una petición adicional para obtener los detalles del Pokémon
+- Estilos optimizados para desktop y mobile
