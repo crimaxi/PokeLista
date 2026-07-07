@@ -48,4 +48,19 @@ describe('App bloqueados', () => {
     expect(screen.getByRole('button', { name: /desbloquear/i })).toBeInTheDocument();
     expect(screen.getByText(/No se encontraron Pokémon que coincidan con ""/i)).toBeInTheDocument();
   });
+
+  it('persiste favoritos y bloqueados en localStorage', () => {
+    const { unmount } = render(<App />);
+
+    fireEvent.click(screen.getByRole('button', { name: /agregar a favoritos/i }));
+    fireEvent.click(screen.getByRole('button', { name: /bloquear/i }));
+
+    expect(window.localStorage.getItem('favorites')).toContain('pikachu');
+    expect(window.localStorage.getItem('blockedItems')).toContain('pikachu');
+
+    unmount();
+    render(<App />);
+
+    expect(screen.getByRole('button', { name: /desbloquear/i })).toBeInTheDocument();
+  });
 });

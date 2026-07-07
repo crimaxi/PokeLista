@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useFetch } from './hooks/useFetch';
+import { useLocalStorage } from './hooks/useLocalStorage';
 import { Header } from './components/Header';
 import { SearchBar } from './components/SearchBar';
 import { ItemList } from './components/ItemList';
 import { FavoritesPanel } from './components/FavoritesPanel';
 import { BlockedPanel } from './components/BlockedPanel';
+import { Statistics } from './components/Statistics';
 import { LoadingSpinner } from './components/LoadingSpinner';
 import { ErrorMessage } from './components/ErrorMessage';
 import './App.css';
@@ -19,11 +21,9 @@ function App() {
   // Estado para la lista filtrada
   const [filteredPokemon, setFilteredPokemon] = useState([]);
 
-  // Estado para los favoritos (almacena nombres de pokemon)
-  const [favorites, setFavorites] = useState([]);
-
-  // Estado para los elementos bloqueados
-  const [blockedItems, setBlockedItems] = useState([]);
+  // Estados persistidos en localStorage para favoritos y bloqueados
+  const [favorites, setFavorites] = useLocalStorage('favorites', []);
+  const [blockedItems, setBlockedItems] = useLocalStorage('blockedItems', []);
 
   // Usar el hook personalizado para consumir la API
   const { data, loading, error } = useFetch(apiUrl);
@@ -79,6 +79,12 @@ function App() {
 
       {/* Barra de búsqueda */}
       <SearchBar value={searchTerm} onChange={setSearchTerm} />
+
+      <Statistics
+        total={pokemon.length}
+        favorites={favorites.length}
+        blocked={blockedItems.length}
+      />
 
       <div className="main-container">
         {/* Mostrar spinner mientras carga */}
