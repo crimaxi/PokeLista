@@ -49,6 +49,14 @@ describe('App bloqueados', () => {
     expect(screen.getByText(/No se encontraron Pokémon que coincidan con ""/i)).toBeInTheDocument();
   });
 
+  it('muestra la sección de identificación del equipo en la página principal', () => {
+    render(<App />);
+
+    expect(screen.getByText(/equipo de desarrollo/i)).toBeInTheDocument();
+    expect(screen.getByText(/ana/i)).toBeInTheDocument();
+    expect(screen.getByText(/luis/i)).toBeInTheDocument();
+  });
+
   it('persiste favoritos y bloqueados en localStorage', () => {
     const { unmount } = render(<App />);
 

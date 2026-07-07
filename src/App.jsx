@@ -73,6 +73,11 @@ function App() {
   // Obtener los objetos completos de los favoritos
   const favoritePokemons = pokemon.filter((p) => favorites.includes(p.name));
 
+  const teamMembers = [
+    { name: 'Christopher', role: 'Diseño y experiencia de usuario' },
+    { name: 'Alexis', role: 'Desarrollo y lógica de la app' },
+  ];
+
   return (
     <div className="app">
       <Header />
@@ -86,6 +91,21 @@ function App() {
         blocked={blockedItems.length}
       />
 
+      <section className="team-section" aria-label="identificación del equipo">
+        <div className="team-section__header">
+          <h2>Equipo de desarrollo</h2>
+          <p>Proyecto final de evaluación</p>
+        </div>
+        <div className="team-members">
+          {teamMembers.map((member) => (
+            <div className="team-member" key={member.name}>
+              <span className="team-member__name">{member.name}</span>
+              <span className="team-member__role">{member.role}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <div className="main-container">
         {/* Mostrar spinner mientras carga */}
         {loading && <LoadingSpinner />}
@@ -96,27 +116,29 @@ function App() {
         {/* Mostrar lista filtrada si no hay error ni está cargando */}
         {!loading && !error && (
           <>
-            {filteredPokemon.length > 0 ? (
-              <ItemList
-                items={filteredPokemon}
-                favorites={favorites}
-                blockedItems={blockedItems}
-                onToggleFavorite={toggleFavorite}
-                onToggleBlock={toggleBlock}
-              />
-            ) : (
-              <div className="no-results">
-                {pokemon.length === 0 ? (
-                  <p>No hay Pokémon para mostrar</p>
-                ) : (
-                  <p>
-                    {searchTerm
-                      ? `No se encontraron Pokémon que coincidan con "${searchTerm}"`
-                      : 'No hay Pokémon visibles en este momento'}
-                  </p>
-                )}
-              </div>
-            )}
+            <div className="content-area">
+              {filteredPokemon.length > 0 ? (
+                <ItemList
+                  items={filteredPokemon}
+                  favorites={favorites}
+                  blockedItems={blockedItems}
+                  onToggleFavorite={toggleFavorite}
+                  onToggleBlock={toggleBlock}
+                />
+              ) : (
+                <div className="no-results">
+                  {pokemon.length === 0 ? (
+                    <p>No hay Pokémon para mostrar</p>
+                  ) : (
+                    <p>
+                      {searchTerm
+                        ? `No se encontraron Pokémon que coincidan con "${searchTerm}"`
+                        : 'No hay Pokémon visibles en este momento'}
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
 
             <div className="side-panels">
               <FavoritesPanel

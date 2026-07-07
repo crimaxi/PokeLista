@@ -61,6 +61,27 @@ npm run dev
 npm run build
 ```
 
+## 🌐 Despliegue en línea
+
+### Opción 1: Vercel
+1. Crea una cuenta en Vercel y conecta tu repositorio de GitHub.
+2. Selecciona este proyecto y usa los ajustes por defecto.
+3. Vercel detectará Vite automáticamente y construirá la app con:
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+4. Haz clic en Deploy.
+
+### Opción 2: Netlify
+1. Crea una cuenta en Netlify y arrastra la carpeta `dist` generada por `npm run build`.
+2. O bien, conecta el repositorio y define:
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+3. Confirma el despliegue.
+
+### Verificar el sitio
+- Abre la URL generada por Vercel o Netlify.
+- Confirma que la página cargue correctamente y que se vea el listado de Pokémon, los paneles laterales y la sección de equipo.
+
 ## 📌 API Utilizada
 
 **[PokeAPI](https://pokeapi.co/)** - API pública y gratuita de Pokémon
