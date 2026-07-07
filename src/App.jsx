@@ -91,21 +91,6 @@ function App() {
         blocked={blockedItems.length}
       />
 
-      <section className="team-section" aria-label="identificación del equipo">
-        <div className="team-section__header">
-          <h2>Equipo de desarrollo</h2>
-          <p>Proyecto final de evaluación</p>
-        </div>
-        <div className="team-members">
-          {teamMembers.map((member) => (
-            <div className="team-member" key={member.name}>
-              <span className="team-member__name">{member.name}</span>
-              <span className="team-member__role">{member.role}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
       <div className="main-container">
         {/* Mostrar spinner mientras carga */}
         {loading && <LoadingSpinner />}
@@ -154,6 +139,21 @@ function App() {
           </>
         )}
       </div>
+
+      <section className="team-section" aria-label="identificación del equipo">
+        <div className="team-section__header">
+          <h2>Equipo de desarrollo</h2>
+          <p>Proyecto final de evaluación</p>
+        </div>
+        <div className="team-members">
+          {teamMembers.map((member) => (
+            <div className="team-member" key={member.name}>
+              <span className="team-member__name">{member.name}</span>
+              <span className="team-member__role">{member.role}</span>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
