@@ -4,7 +4,7 @@ import { ItemCard } from './ItemCard';
  * Componente ItemList
  * Renderiza la lista completa de elementos obtenidos de la API
  */
-export const ItemList = ({ items, favorites, onToggleFavorite }) => {
+export const ItemList = ({ items, favorites, blockedItems, onToggleFavorite, onToggleBlock }) => {
   if (!items || items.length === 0) {
     return <div className="item-list empty">No hay elementos para mostrar</div>;
   }
@@ -12,11 +12,13 @@ export const ItemList = ({ items, favorites, onToggleFavorite }) => {
   return (
     <div className="item-list">
       {items.map((item) => (
-        <ItemCard 
-          key={item.name} 
+        <ItemCard
+          key={item.name}
           item={item}
           isFavorite={favorites.includes(item.name)}
+          isBlocked={blockedItems.includes(item.name)}
           onToggleFavorite={() => onToggleFavorite(item.name)}
+          onToggleBlock={() => onToggleBlock(item.name)}
         />
       ))}
     </div>

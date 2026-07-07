@@ -2,9 +2,9 @@ import { useFetch } from '../hooks/useFetch';
 
 /**
  * Componente ItemCard
- * Renderiza una tarjeta individual del Pokémon con su imagen y botón de favoritos
+ * Renderiza una tarjeta individual del Pokémon con su imagen y botones de favoritos y bloqueo
  */
-export const ItemCard = ({ item, isFavorite, onToggleFavorite }) => {
+export const ItemCard = ({ item, isFavorite, isBlocked, onToggleFavorite, onToggleBlock }) => {
   // Consumir la API para obtener los detalles del Pokémon (incluyendo imagen)
   const { data: pokemonDetails, loading } = useFetch(item.url);
 
@@ -26,17 +26,28 @@ export const ItemCard = ({ item, isFavorite, onToggleFavorite }) => {
           ) : (
             <div className="card-placeholder">Sin imagen</div>
           )}
-          
+
           {/* Mostrar nombre del Pokémon */}
           <h3 className="card-title">{item.name.toUpperCase()}</h3>
 
           {/* Botón para agregar/quitar de favoritos */}
-          <button 
+          <button
+            type="button"
             className={`btn-favorite ${isFavorite ? 'active' : ''}`}
             onClick={onToggleFavorite}
             title={isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'}
           >
             {isFavorite ? '❤️ Favorito' : '🤍 Agregar'}
+          </button>
+
+          {/* Botón para bloquear un elemento */}
+          <button
+            type="button"
+            className={`btn-block ${isBlocked ? 'blocked' : ''}`}
+            onClick={onToggleBlock}
+            title={isBlocked ? 'Desbloquear elemento' : 'Bloquear elemento'}
+          >
+            {isBlocked ? '🔓 Desbloquear' : '🚫 Bloquear'}
           </button>
         </>
       )}
